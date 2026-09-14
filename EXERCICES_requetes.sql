@@ -23,15 +23,39 @@ SELECT * FROM Enfants WHERE  MONTH(date_naissance) IN (2, 7) AND CHAR_LENGTH(pre
 SELECT * FROM Enfants WHERE (date_naissance LIKE '%-02-%' OR date_naissance LIKE '%-07-%') AND prenom NOT LIKE '______%';
 
 -- Le nombre de stylos par couleurs, dans l'ordre du plus nombreux aux moins nombreux
-
+SELECT couleur, COUNT(*) AS quantite FROM Stylos GROUP BY couleur ORDER BY quantite DESC;
 
 -- Les stylos de m***e qui ont plus de 50% d'encre mais qui ne fonctionnent pas
-
+SELECT * FROM Stylos WHERE niveau_encre > 50 AND fonctionne = FALSE;
 
 -- Le nombre de stylos du futur, qui n'ont plus d'encre mais qui fonctionnent
+SELECT * FROM Stylos WHERE niveau_encre = 0 AND fonctionne = TRUE;
+
+-- Par marque, pourcentage de stylos qui fonctionnent triés par la meilleure marque
+| Parker   |  97%  |
+| Velleda  |   7%  |
+| Bic      |  84%  |
+SELECT marque, ROUND(100 * SUM(fonctionne) / COUNT(*), 2) AS pourcentage_fonctionnel
+FROM Stylos
+GROUP BY marque
+ORDER BY pourcentage_fonctionnel DESC;
 
 
--- Par marque, pourcentage de stylos qui fonctionnent
+-- Par marque, pourcentage de stylos qui fonctionnent triés par la meilleure marque, pour les marques ayant plus de 75%
+SELECT marque, ROUND(100 * SUM(fonctionne) / COUNT(*), 2) AS pourcentage_fonctionnel
+FROM Stylos
+GROUP BY marque
+HAVING pourcentage_fonctionnel > 75
+ORDER BY pourcentage_fonctionnel DESC;
+
+
+-- Nom et prenom des enfants ayant un stylo Violet
+SELECT nom, prenom FROM Enfants e JOIN Stylos s ON s.id_enfant = e.id WHERE couleur = 'Violet';
 
 
 -- Le nombre de stylos par enfant
+SELECT nom, prenom, COUNT(*) FROM Stylos s JOIN Enfants e ON e.id = s.id_enfant GROUP BY prenom, nom
+
+
+
+-- Afficher les stylos mâchés par Margaux Boyer
