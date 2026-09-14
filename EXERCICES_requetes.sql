@@ -1,7 +1,5 @@
 -- REQUETES SQL
 
--- A FAIRE POUR DEMAIN le 9/9/26
-
 
 -- Les infos des enfants dont le nom termine par -ert
 SELECT * FROM Enfants WHERE nom LIKE '%ert';
@@ -22,14 +20,18 @@ SELECT * FROM Enfants WHERE (MONTH(date_naissance) = 7 OR MONTH(date_naissance) 
 SELECT * FROM Enfants WHERE  MONTH(date_naissance) IN (2, 7) AND CHAR_LENGTH(prenom) < 6;
 SELECT * FROM Enfants WHERE (date_naissance LIKE '%-02-%' OR date_naissance LIKE '%-07-%') AND prenom NOT LIKE '______%';
 
+
 -- Le nombre de stylos par couleurs, dans l'ordre du plus nombreux aux moins nombreux
 SELECT couleur, COUNT(*) AS quantite FROM Stylos GROUP BY couleur ORDER BY quantite DESC;
+
 
 -- Les stylos de m***e qui ont plus de 50% d'encre mais qui ne fonctionnent pas
 SELECT * FROM Stylos WHERE niveau_encre > 50 AND fonctionne = FALSE;
 
+
 -- Le nombre de stylos du futur, qui n'ont plus d'encre mais qui fonctionnent
 SELECT * FROM Stylos WHERE niveau_encre = 0 AND fonctionne = TRUE;
+
 
 -- Par marque, pourcentage de stylos qui fonctionnent triés par la meilleure marque
 | Parker   |  97%  |
@@ -50,12 +52,50 @@ ORDER BY pourcentage_fonctionnel DESC;
 
 
 -- Nom et prenom des enfants ayant un stylo Violet
-SELECT nom, prenom FROM Enfants e JOIN Stylos s ON s.id_enfant = e.id WHERE couleur = 'Violet';
+SELECT nom, prenom FROM Enfants e JOIN Stylos s ON s.id_enfant = e.id 
+WHERE couleur = 'Violet';
 
 
 -- Le nombre de stylos par enfant
-SELECT nom, prenom, COUNT(*) FROM Stylos s JOIN Enfants e ON e.id = s.id_enfant GROUP BY prenom, nom
-
+SELECT nom, prenom, COUNT(*) FROM Stylos s 
+JOIN Enfants e ON e.id = s.id_enfant GROUP BY prenom, nom;
 
 
 -- Afficher les stylos mâchés par Margaux Boyer
+SELECT * FROM Stylos s
+JOIN Macher m ON m.id_stylo = s.id
+JOIN Enfants e ON e.id = m.id_enfant
+WHERE nom = 'Boyer' AND prenom = 'Margaux'; 
+
+
+-- Liste des enfants ayant mâché un de leur stylo.
+SELECT * FROM Stylos s
+JOIN Macher m ON m.id_stylo = s.id
+JOIN Enfants e ON e.id = m.id_enfant
+WHERE m.id_enfant = s.id_enfant; 
+
+
+-- Le nombre de stylos machés par prenom d'enfant
+SELECT id, prenom, nom, COUNT(*) FROM Macher m 
+JOIN Enfants e ON e.id = m.id_enfant
+GROUP BY id, prenom, nom ORDER BY nom; 
+
+
+-- Le nombre de stylos machés par enfant pour ceux qui en ont mâché plus de deux
+SELECT id, prenom, nom, COUNT(*) as nb_stylos FROM Macher m 
+JOIN Enfants e ON e.id = m.id_enfant
+GROUP BY id, prenom, nom HAVING nb_stylos > 2 
+ORDER BY nom; 
+
+
+-- Les enfants ayant mâché un stylo qui n'appartient à personne
+SELECT * FROM Enfants e 
+JOIN Macher m ON m.id_enfant = e.id
+JOIN Stylos s ON s.id = m.id_stylo
+WHERE macher.id_stylo IS NULL;
+
+-- Par enfant, la moyenne du niveau d'encre de ses stylos qui ont été mâchés
+SELECT e.id, e.nom, e.prenom, AVG(niveau_encre) FROM Enfants e
+JOIN Stylos s ON s.id_enfant = e.id
+WHERE s.id IN (SELECT id_stylo FROM Macher)
+GROUP BY e.id, e.nom, e.prenom;
