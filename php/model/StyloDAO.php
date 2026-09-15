@@ -53,4 +53,19 @@ class StyloDAO {
 		// retourner cet Stylo
 		return $stylo;
 	}
+
+
+	public function getAll() : array {
+
+		// requete SQL avec jointure pour chopper chaque stylo avec son propriétaire, sans forcément la préparer (juste un $pdo->query($req) )
+		
+
+			// parcourir chaque ligne résultat (fetchAll) et créer un Stylo et lui associer l'enfant propriétaire
+
+			// ajouter chaque stylo créé dans un array
+
+		// renvoyer cet array
+
+	}
+
 }
