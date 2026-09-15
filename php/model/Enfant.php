@@ -3,7 +3,7 @@
 class Enfant {
 	private int    $id;
 	private string $date_naissance;
-	private string $num_tel;
+	private ?string $num_tel;
 	private string $nom;
 	private string $prenom;
 	private float  $taux_humidite;

@@ -17,7 +17,7 @@ class Stylo {
 		$this->enfant = new Enfant();
 	}
 
-	public function __get__($attr) {
+	public function __get($attr) {
 		switch($attr) {
 			case 'id': 				return $this->id; 				break;
 			case 'couleur': 		return $this->couleur; 			break;
@@ -29,7 +29,7 @@ class Stylo {
 		}
 	}
 
-	public function __set__($attr, $val) {
+	public function __set($attr, $val) {
 		switch($attr) {
 			case 'id': 				$this->id = $val; 			break;
 			case 'couleur': 		$this->couleur = $val; 		break;
@@ -43,12 +43,12 @@ class Stylo {
 
 	public function __toString() {
 		$r  = '';
-		$r .= 'id : ' . $this->id  . PHP_EOL; 
-		$r .= 'marque : ' . $this->marque  . PHP_EOL; 
-		$r .= 'couleur : ' . $this->couleur  . PHP_EOL; 
-		$r .= 'niveau_encre : ' . $this->niveau_encre  . PHP_EOL; 
-		$r .= 'fonctionne : ' . $this->distanceAuSol  . PHP_EOL; 
-		$r .= 'Propriétaire : ' . $this->enfant  . PHP_EOL; 
+		$r .= 'id : ' 		. $this->id  . PHP_EOL; 
+		$r .= 'marque : ' 	. $this->marque  . PHP_EOL; 
+		$r .= 'couleur : ' 	. $this->couleur  . PHP_EOL; 
+		$r .= 'niveau_encre : ' 		. $this->niveau_encre  . PHP_EOL; 
+		$r .= 'fonctionne : ' 		. $this->distanceAuSol  . PHP_EOL; 
+		$r .= 'Propriétaire : ' 		. $this->enfant  . PHP_EOL; 
 		return $r;
 	}
 }

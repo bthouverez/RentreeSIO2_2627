@@ -8,8 +8,8 @@ CREATE TABLE Enfants (
     prenom VARCHAR(50) NOT NULL,
     num_tel VARCHAR(30),
     date_naissance DATE NOT NULL,
-    distance_au_sol INT,
-    taux_humidite FLOAT DEFAULT 70
+    distance_au_sol INT DEFAULT 50,
+    taux_humidite FLOAT DEFAULT 0.7
 );
  
  
