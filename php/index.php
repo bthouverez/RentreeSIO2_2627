@@ -1,6 +1,9 @@
-<?php require_once('Enfant.php');
+<?php 
 
-$e = new Enfant();
+require_once('model/EnfantDAO.php');
 
+$dao = new EnfantDAO;
 
-echo $e->name;
+$enfant = $dao->getById(7);
+
+var_dump($enfant);
