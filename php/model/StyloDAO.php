@@ -18,12 +18,17 @@ class StyloDAO {
 
 
 	// getById($id) : Stylo
+
+	// Read
 	public function getById(int $id) : Stylo {
 		// int => Stylo
 
 		// requete SQL
+
+
 		$sql = "SELECT * FROM Stylos s 
 		JOIN Enfants e ON s.id_enfant = e.id WHERE s.id = ?";
+
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute([$id]);
 
@@ -54,17 +59,57 @@ class StyloDAO {
 		return $stylo;
 	}
 
-
+	// Read
 	public function getAll() : array {
 
-		// requete SQL avec jointure pour chopper chaque stylo avec son propriétaire, sans forcément la préparer (juste un $pdo->query($req) )
-		
 
-			// parcourir chaque ligne résultat (fetchAll) et créer un Stylo et lui associer l'enfant propriétaire
+		// requete SQL pour chopper chaque stylo 
+
+		$sql = "SELECT * FROM Stylos";
+		$stmt = $this->pdo->query($sql);  // execute la requete
+	
+
+
+// parcourir chaque ligne résultat (fetchAll) et créer un Stylo et lui associer l'enfant propriétaire
+
+
+	/* Chacune des trois boucles fait la meme chose, a chaque tour
+	de boucle, elle met un Stylo (array tout pourri) dans $tab et elle 
+	boucle comme ça 50 fois, parce que y'a 50 stylos dans la BDD
+
+		// CA 
+		$allTab = $stmt->fetchAll();
+		foreach($allTab as $tab) {
+
+		}
+
+		// EQUIVAUT A CA
+		for($ii = 0; $ii < $stmt->rowCount(); $ii++) {
+			$tab = $stmt->fetch();
+		}
+*/
+
+		$lesStylos = [];
+
+		// EQUIVAUT A CA AUSSI
+		while($tab = $stmt->fetch()) {
+			$stylo = new Stylo;
+			$stylo->id = $tab['id'];
+			$stylo->marque = $tab['marque'];
+			$stylo->couleur = $tab['couleur'];
+			$stylo->fonctionne = $tab['fonctionne'];
+			$stylo->niveau_encre = $tab['niveau_encre'];
 
 			// ajouter chaque stylo créé dans un array
+			$lesStylos[] = $stylo;
+
+		}
+
 
 		// renvoyer cet array
+		return $lesStylos;
+
+
 
 	}
 

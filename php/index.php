@@ -6,12 +6,16 @@ ini_set('display_startup_errors', 1);
 require_once('model/EnfantDAO.php');
 require_once('model/StyloDAO.php');
 
-
 $daoStylo = new StyloDAO;
 
 $stylo = $daoStylo->getById(13);
 
+$stylos = $daoStylo->getAll();
 
+echo '<pre>';
+
+var_dump($stylos);
+echo '</pre>';
 
 $daoEnfant = new EnfantDAO;
 $enfant = $daoEnfant->getById(24);

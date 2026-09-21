@@ -11,13 +11,13 @@ class Enfant {
 	private array  $trousse;
 
 	public function __construct() {
-		$this->id = 42;
-		$this->date_naissance = '2002-02-03';
-		$this->num_tel = '+33612365478';
-		$this->nom = 'John';
-		$this->prenom = 'Doe';
-		$this->taux_humidite = 0.25;
-		$this->distance_au_sol = 75;
+		$this->id = -1;
+		$this->date_naissance = '';
+		$this->num_tel = '';
+		$this->nom = '';
+		$this->prenom = '';
+		$this->taux_humidite = 0;
+		$this->distance_au_sol = 0;
 		$this->trousse = [];
 	}
 

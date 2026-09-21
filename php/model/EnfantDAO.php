@@ -61,12 +61,11 @@ class EnfantDAO {
 
 	public function getAll() : array {
 
-		// requete SQL avec jointure pour chopper chaque enfant avec sa liste de stylos, sans forcément la préparer (juste un $pdo->query($req) )
-		
+		// requete SQL qui choppe tous les enfant
 
-			// parcourir chaque ligne résultat (fetchAll) et créer un Enfant et lui associer SES stylos
+			// parcourir chaque ligne résultat et créer un Enfant
 
-			// ajouter chaque enfant créé dans un array
+			// ajouter cet enfant créé dans un array
 
 		// renvoyer cet array
 
