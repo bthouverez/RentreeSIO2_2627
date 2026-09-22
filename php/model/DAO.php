@@ -8,9 +8,9 @@ class DAO {
 	public function __construct() {
 
 		try {
-			$this->pdo = new PDO('mysql:host=127.0.0.1;dbname=introSIO2', 'bthouverez', '321654');
+			$this->pdo = new PDO('mysql:host=127.0.0.1;dbname=lesenfantsmouillesdustylo', 'bthouverez', '321654');
 		} catch(Exception $e) {
-			die('ERROR');
+			die('ERROR : '.$e->getMessage() );
 		}
 
 	}
