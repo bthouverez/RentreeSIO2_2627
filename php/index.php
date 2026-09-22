@@ -8,10 +8,11 @@ ini_set('display_startup_errors', 1);
 
 require_once('model/EnfantDAO.php');
 
+$idEnfant = $_GET['enfant'] ?? 22;
 
 $daoEnfant = new EnfantDAO;
 
-$enfant = $daoEnfant->getById(13);
+$enfant = $daoEnfant->getById($idEnfant);
 
 
 // include copie/colle le code du fichier passé 

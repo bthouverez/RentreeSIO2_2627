@@ -27,7 +27,7 @@ class StyloDAO {
 
 
 		$sql = "SELECT * FROM Stylos s 
-		JOIN Enfants e ON s.id_enfant = e.id WHERE s.id = ?";
+		LEFT JOIN Enfants e ON s.id_enfant = e.id WHERE s.id = ?";
 
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute([$id]);

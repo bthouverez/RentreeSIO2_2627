@@ -23,7 +23,8 @@ class EnfantDAO {
 		// int => Enfant
 
 		// requete SQL
-		$sql = "SELECT * FROM Enfants e JOIN Stylos s ON s.id_enfant = e.id WHERE e.id = ?";
+		$sql = "SELECT e.id, nom, prenom, num_tel, date_naissance, distance_au_sol, taux_humidite, couleur, marque, niveau_encre, fonctionne
+ FROM Enfants e LEFT JOIN Stylos s ON s.id_enfant = e.id WHERE e.id =  ?";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute([$id]);
 
@@ -42,9 +43,9 @@ class EnfantDAO {
 			$enfant->distance_au_sol = $tabEnfants[0]['distance_au_sol'];
 			$enfant->taux_humidite = $tabEnfants[0]['taux_humidite'];
 
-			foreach($tabEnfants as $tabEnfant) {
+			foreach($tabEnfants as $tabEnfant) if($tabEnfant['marque']) {
 				$s = new Stylo;
-				$s->id = $tabEnfant['id'];
+				// $s->id = $tabEnfant['id'];
 				$s->marque = $tabEnfant['marque'];
 				$s->couleur = $tabEnfant['couleur'];
 				$s->niveau_encre = $tabEnfant['niveau_encre'];
