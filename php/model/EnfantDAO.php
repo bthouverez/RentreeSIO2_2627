@@ -1,22 +1,11 @@
 <?php
+require_once('DAO.php');
 require_once('Enfant.php');
 require_once('Stylo.php');
 
-class EnfantDAO {
+class EnfantDAO extends DAO {
 
-	private PDO $pdo;
-
-	// connecter à la base
-	public function __construct() {
-
-		try {
-			$this->pdo = new PDO('mysql:host=127.0.0.1;dbname=introSIO2', 'bthouverez', '321654');
-		} catch(Exception $e) {
-			die('ERROR');
-		}
-
-	}
-
+	
 
 	// getById($id) : Enfant
 	public function getById(int $id) : Enfant {
