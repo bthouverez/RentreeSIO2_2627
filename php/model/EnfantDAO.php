@@ -1,5 +1,6 @@
 <?php
 require_once('Enfant.php');
+require_once('Stylo.php');
 
 class EnfantDAO {
 
@@ -62,12 +63,27 @@ class EnfantDAO {
 	public function getAll() : array {
 
 		// requete SQL qui choppe tous les enfant
+		$sql = 'SELECT * FROM Enfants';
+		$stmt = $this->pdo->query($sql);
 
+			$allEnfants = array();
 			// parcourir chaque ligne résultat et créer un Enfant
-
-			// ajouter cet enfant créé dans un array
+			foreach($stmt->fetchAll() as $tab) {
+				$e = new Enfant;
+				$e->id = $tab['id']; 
+				$e->nom = $tab['nom']; 
+				$e->prenom = $tab['prenom']; 
+				$e->num_tel = $tab['num_tel']; 
+				$e->date_naissance = $tab['date_naissance']; 
+				$e->distance_au_sol = $tab['distance_au_sol'];
+				$e->taux_humidite = $tab['taux_humidite'];
+				
+				// ajouter cet enfant créé dans un array
+				$allEnfants[] = $e;
+			}
 
 		// renvoyer cet array
+		return $allEnfants;
 
 	}
 
