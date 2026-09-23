@@ -103,9 +103,10 @@ class StyloDAO extends DAO {
 
 		// renvoyer cet array
 		return $lesStylos;
-
-
-
 	}
 
+
+	public function create(Stylo $stylo): int {
+		// TODO 
+	} 
 }

@@ -81,10 +81,25 @@ class EnfantDAO extends DAO {
 	public function create(Enfant $enfant) : int { 
 
 		// Extraire les données en $enfant
+		$sql = "INSERT INTO Enfants 
+				(nom, prenom, distance_au_sol, taux_humidite, date_naissance, num_tel) 
+				VALUES (?, ?, ?, ?, ?, ?);";
+
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute(
+			[
+				$enfant->nom, 
+				$enfant->prenom, 
+				$enfant->distance_au_sol,
+				$enfant->taux_humidite,
+				$enfant->date_naissance, 
+				$enfant->num_tel 
+			]);
 
 		// a insérer dans une requête INSERT INTO
 
 		// renvoyer l'id du nouvel enfant créé
+		return $this->pdo->lastInsertId();
 
 	}
 

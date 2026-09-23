@@ -7,13 +7,15 @@ require_once('model/EnfantDAO.php');
 require_once('model/StyloDAO.php');
 
 $daoEnfant = new EnfantDAO;
-
+// LEs données qui viennent du formulaire
 $nouvelEnfant = new Enfant;
-$nouvelEnfant->nom = "Macron";
-$nouvelEnfant->prenom = "Brigitte";
-$nouvelEnfant->taux_humidite = 0.12;
-$nouvelEnfant->distance_au_sol = 12536;
-$nouvelEnfant->date_naissance = '1953-04-13';
+$nouvelEnfant->nom = "Meluch";
+$nouvelEnfant->prenom = "Jean claude";
+$nouvelEnfant->taux_humidite = 0.82;
+$nouvelEnfant->distance_au_sol = 126;
+$nouvelEnfant->num_tel = null;
+$nouvelEnfant->date_naissance = '1902-02-02';
 
 
-$dNouvelEnfant = $daoEnfant->create($nouvelEnfant);
+$idNouvelEnfant = $daoEnfant->create($nouvelEnfant);
+echo $idNouvelEnfant;
