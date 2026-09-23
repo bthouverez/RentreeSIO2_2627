@@ -25,23 +25,29 @@ class StyloDAO extends DAO {
 		$tabStylo = $stmt->fetch();
 		$stylo = new Stylo();
 
+
 		if($tabStylo) {
-			$stylo->id = $tabStylo['id'];
+			$stylo->id = $tabStylo[0];
 			$stylo->marque = $tabStylo['marque'];
 			$stylo->couleur = $tabStylo['couleur'];
 			$stylo->fonctionne = $tabStylo['fonctionne'];
 			$stylo->niveau_encre = $tabStylo['niveau_encre'];
 
-			$enfant = new Enfant;
-			$enfant->id = $tabStylo['id'];
-			$enfant->nom = $tabStylo['nom'];
-			$enfant->prenom = $tabStylo['prenom'];
-			$enfant->num_tel = $tabStylo['num_tel'];
-			$enfant->date_naissance = $tabStylo['date_naissance'];
-			$enfant->distance_au_sol = $tabStylo['distance_au_sol'];
-			$enfant->taux_humidite = $tabStylo['taux_humidite'];
+			if(isset($tabStylo['nom'])) {
 
-			$stylo->enfant = $enfant;
+				$enfant = new Enfant;
+				$enfant->id = $tabStylo['id'];
+				$enfant->nom = $tabStylo['nom'];
+				$enfant->prenom = $tabStylo['prenom'];
+				$enfant->num_tel = $tabStylo['num_tel'];
+				$enfant->date_naissance = $tabStylo['date_naissance'];
+				$enfant->distance_au_sol = $tabStylo['distance_au_sol'];
+				$enfant->taux_humidite = $tabStylo['taux_humidite'];
+
+				$stylo->enfant = $enfant;
+			} else {
+				$stylo->enfant = null;
+			}
 		}
 
 		// retourner cet Stylo

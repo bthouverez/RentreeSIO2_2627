@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404 — Page introuvable</title>
+<style>
+  :root{
+    --ink:#15213b; --blue:#1976ff; --paper:#fffdf8; --muted:#667085;
+    --water:#6ec8ff; --pink:#ff8fa3; --yellow:#ffd86b;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; overflow:hidden;
+    font-family:"Comic Sans MS","Trebuchet MS",system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 15% 15%,#dff5ff 0 9%,transparent 10%),
+      radial-gradient(circle at 85% 12%,#fff1c9 0 8%,transparent 9%),
+      linear-gradient(135deg,#eef8ff,#fffdf5 55%,#eef7ff);
+  }
+  .page{min-height:100vh;display:grid;place-items:center;padding:28px}
+  .card{
+    width:min(1120px,96vw); min-height:min(720px,92vh);
+    position:relative; overflow:hidden;
+    background:rgba(255,255,255,.88);
+    border:3px solid var(--ink); border-radius:34px;
+    box-shadow:12px 14px 0 rgba(21,33,59,.12);
+    display:grid; grid-template-columns:1fr 1.15fr 1fr;
+    align-items:center; gap:10px; padding:42px;
+  }
+  .card:before,.card:after{
+    content:"";position:absolute;width:120px;height:34px;background:#ffd86b;
+    opacity:.65;transform:rotate(-7deg);top:24px;left:36px
+  }
+  .card:after{left:auto;right:35px;transform:rotate(8deg);background:#9ee4ff}
+  .note{
+    position:absolute;top:38px;left:50%;transform:translateX(-50%) rotate(-2deg);
+    background:#fff4a8;padding:9px 18px;border:1px solid #e2ca62;
+    box-shadow:3px 4px 0 rgba(0,0,0,.08);font-weight:700
+  }
+  .center{text-align:center;z-index:2}
+  .error{
+    font-size:clamp(7rem,16vw,12rem);line-height:.78;margin:0;
+    letter-spacing:-.08em;color:var(--ink);
+    text-shadow:7px 7px 0 #9fdcff;
+    animation:wobble 3s ease-in-out infinite;
+  }
+  h1{font-size:clamp(1.7rem,3vw,2.7rem);margin:20px 0 12px}
+  .lead{font-size:1.1rem;line-height:1.5;margin:0 auto 24px;max-width:560px}
+  .buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  a{
+    display:inline-block;text-decoration:none;font-weight:800;
+    padding:13px 22px;border-radius:999px;border:2px solid var(--ink);
+    background:var(--blue);color:#fff;box-shadow:4px 5px 0 var(--ink);
+    transition:.15s transform,.15s box-shadow;
+  }
+  a.secondary{background:#fff;color:var(--ink)}
+  a:hover{transform:translate(2px,2px);box-shadow:2px 3px 0 var(--ink)}
+  .kid{position:relative;height:430px;display:flex;align-items:flex-end;justify-content:center}
+  .kid svg{width:100%;height:100%;max-width:330px;overflow:visible}
+  .tear{animation:tear 1.2s infinite ease-in}
+  .tear:nth-child(2){animation-delay:.4s}
+  .tear:nth-child(3){animation-delay:.8s}
+  .ink{animation:drip 2s infinite ease-in-out}
+  .puddle{animation:puddle 2.4s infinite ease-in-out}
+  .caption{
+    position:absolute;bottom:8px;background:#fff;padding:8px 12px;border:2px dashed var(--ink);
+    border-radius:12px;font-weight:700;transform:rotate(-3deg)
+  }
+  .caption.right{transform:rotate(3deg)}
+  .doodle{position:absolute;font-size:30px;opacity:.55}
+  .d1{left:8%;top:18%}.d2{right:7%;top:28%}.d3{left:14%;bottom:8%}.d4{right:13%;bottom:9%}
+  .footer{position:absolute;bottom:15px;left:0;right:0;text-align:center;color:var(--muted);font-size:.9rem}
+  @keyframes wobble{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg) translateY(-5px)}}
+  @keyframes tear{0%{transform:translateY(-4px);opacity:.2}30%{opacity:1}100%{transform:translateY(85px);opacity:0}}
+  @keyframes drip{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.25);transform-origin:top}}
+  @keyframes puddle{50%{transform:scale(1.08)}}
+  @media(max-width:850px){
+    body{overflow:auto}.page{padding:14px}.card{grid-template-columns:1fr;min-height:auto;padding:70px 20px 55px}
+    .kid{height:270px}.error{font-size:7rem}.note{top:18px}
+    .footer{position:relative;margin-top:20px}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <main class="card">
+    <div class="note">📌 Même les enfants la cherchent...</div>
+    <div class="doodle d1">✏️</div><div class="doodle d2">💧</div>
+    <div class="doodle d3">📚</div><div class="doodle d4">🖊️</div>
+
+    <section class="kid">
+      <svg viewBox="0 0 300 430" aria-label="Enfant qui pleure">
+        <ellipse class="puddle" cx="150" cy="405" rx="125" ry="20" fill="#8edcff" opacity=".65"/>
+        <rect x="80" y="260" width="140" height="125" rx="38" fill="#4d8df7"/>
+        <path d="M91 290Q150 330 209 290" fill="none" stroke="#fff" stroke-width="8" opacity=".4"/>
+        <circle cx="150" cy="185" r="82" fill="#f5b07c"/>
+        <path d="M72 175Q78 83 154 91Q226 86 230 175Q196 135 160 148Q116 132 72 175" fill="#5b392b"/>
+        <ellipse cx="121" cy="188" rx="10" ry="7" fill="#15213b"/>
+        <ellipse cx="179" cy="188" rx="10" ry="7" fill="#15213b"/>
+        <path d="M116 222Q150 246 184 222" fill="none" stroke="#7c2b2b" stroke-width="8" stroke-linecap="round"/>
+        <path class="tear" d="M115 195Q103 220 115 238Q127 220 115 195Z" fill="#59bfff"/>
+        <path class="tear" d="M185 195Q173 220 185 238Q197 220 185 195Z" fill="#59bfff"/>
+        <path class="tear" d="M95 205Q84 226 95 241Q106 226 95 205Z" fill="#59bfff"/>
+        <path class="ink" d="M105 276Q130 291 157 278Q180 270 198 283L188 300Q155 287 119 303Z" fill="#183a8a"/>
+        <path d="M92 385l-28 18M208 385l28 18" stroke="#15213b" stroke-width="13" stroke-linecap="round"/>
+        <rect x="38" y="387" width="50" height="22" rx="10" fill="#ffcf75"/>
+        <rect x="212" y="387" width="50" height="22" rx="10" fill="#ffcf75"/>
+      </svg>
+      <div class="caption">« J'ai perdu la page... 😭 »</div>
+    </section>
+
+    <section class="center">
+      <p class="error">404</p>
+      <h1>Cette page est introuvable !</h1>
+      <p class="lead">
+        On a cherché partout.<br>
+        Les enfants ont tellement pleuré qu'ils ont fini par mouiller le site.
+        <br><strong>Et quelqu'un a encore fait tomber son stylo.</strong> 🖊️
+      </p>
+      <div class="buttons">
+        <a href="/">🏠 Retour à l'accueil</a>
+        <a class="secondary" href="javascript:history.back()">← Page précédente</a>
+      </div>
+    </section>
+
+    <section class="kid">
+      <svg viewBox="0 0 300 430" aria-label="Enfant qui pleure avec stylo">
+        <ellipse class="puddle" cx="150" cy="405" rx="125" ry="20" fill="#8edcff" opacity=".65"/>
+        <path d="M75 390Q90 275 150 260Q210 275 225 390Z" fill="#ff8fa3"/>
+        <circle cx="150" cy="180" r="82" fill="#f3aa78"/>
+        <path d="M75 175Q70 90 150 82Q232 90 225 175Q207 126 182 137Q145 108 113 137Q91 130 75 175" fill="#75452f"/>
+        <circle cx="119" cy="187" r="9" fill="#15213b"/><circle cx="181" cy="187" r="9" fill="#15213b"/>
+        <path d="M117 225Q150 250 183 225" fill="none" stroke="#7c2b2b" stroke-width="8" stroke-linecap="round"/>
+        <path class="tear" d="M113 194Q101 219 113 237Q125 219 113 194Z" fill="#59bfff"/>
+        <path class="tear" d="M187 194Q175 219 187 237Q199 219 187 194Z" fill="#59bfff"/>
+        <path class="tear" d="M96 207Q85 229 96 244Q107 229 96 207Z" fill="#59bfff"/>
+        <path class="ink" d="M105 284Q140 300 195 279L202 310Q145 326 98 307Z" fill="#264dba"/>
+        <path d="M98 385l-30 19M202 385l30 19" stroke="#15213b" stroke-width="13" stroke-linecap="round"/>
+        <rect x="38" y="388" width="52" height="20" rx="10" fill="#6ec8ff"/>
+        <rect x="210" y="388" width="52" height="20" rx="10" fill="#6ec8ff"/>
+        <g transform="translate(205 285) rotate(25)">
+          <rect width="15" height="95" rx="7" fill="#1976ff"/>
+          <polygon points="0,0 15,0 7.5,-25" fill="#15213b"/>
+          <rect y="67" width="15" height="12" fill="#ffd86b"/>
+        </g>
+      </svg>
+      <div class="caption right">« C'est le stylo qui fuit ! 😭 »</div>
+    </section>
+
+    <div class="footer">Ne pleure pas... il reste plein de pages à découvrir. 💙</div>
+  </main>
+</div>
+</body>
+</html>

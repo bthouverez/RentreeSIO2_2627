@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oups, page introuvable</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBF6EC;
+    --paper-line: #E3D9C2;
+    --ink: #25324A;
+    --ink-soft: #4A5A78;
+    --bic-red: #D64545;
+    --highlighter: #F2C94C;
+    --felt-green: #4E9E6E;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Feuille de cahier : lignes horizontales + marge rouge */
+  body {
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px);
+    background-size: 100% 42px;
+    background-position: 0 90px;
+  }
+
+  .margin-line {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 64px;
+    width: 2px;
+    background: rgba(214, 69, 69, 0.35);
+    z-index: 0;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px 80px;
+  }
+
+  /* Le gribouillis animé qui part du stylo */
+  .doodle-wrap {
+    width: min(90vw, 560px);
+    margin-bottom: 8px;
+  }
+
+  .doodle-wrap svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .doodle-path {
+    fill: none;
+    stroke: var(--bic-red);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: draw 2.2s ease-out forwards;
+  }
+
+  .pen-tip {
+    opacity: 0;
+    animation: pen-appear 0.3s ease-out 1.9s forwards;
+  }
+
+  @keyframes draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes pen-appear {
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .doodle-path { animation: none; stroke-dashoffset: 0; }
+    .pen-tip { animation: none; opacity: 1; }
+  }
+
+  h1 {
+    font-family: 'Patrick Hand', cursive;
+    font-size: clamp(2.4rem, 8vw, 4.2rem);
+    line-height: 1;
+    margin: 0 0 4px;
+    color: var(--ink);
+    transform: rotate(-1.5deg);
+  }
+
+  .highlight {
+    background: linear-gradient(120deg, transparent 0%, transparent 4%, var(--highlighter) 4%, var(--highlighter) 96%, transparent 96%);
+    padding: 0 4px;
+  }
+
+  p.lead {
+    font-size: clamp(1.05rem, 2.6vw, 1.3rem);
+    max-width: 34ch;
+    margin: 18px auto 32px;
+    color: var(--ink-soft);
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 10px 26px;
+    border: 3px solid var(--ink);
+    border-radius: 40px 42px 38px 44px / 44px 38px 42px 40px;
+    background: var(--paper);
+    position: relative;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  .btn:hover, .btn:focus-visible {
+    transform: rotate(-1deg) scale(1.03);
+    background: var(--highlighter);
+    outline: none;
+  }
+
+  .btn:focus-visible {
+    box-shadow: 0 0 0 3px var(--felt-green);
+  }
+
+  .btn.secondary {
+    border-color: var(--felt-green);
+    color: var(--felt-green);
+  }
+  .btn.secondary:hover, .btn.secondary:focus-visible {
+    background: rgba(78, 158, 110, 0.15);
+  }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    padding: 0 24px 24px;
+  }
+
+  footer .paw {
+    display: inline-block;
+    transform: rotate(-8deg);
+  }
+</style>
+</head>
+<body>
+
+  <div class="margin-line" aria-hidden="true"></div>
+
+  <main>
+    <div class="doodle-wrap" aria-hidden="true">
+      <svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg">
+        <path class="doodle-path" d="M 30 120
+          C 60 40, 110 30, 140 90
+          C 160 130, 130 170, 90 160
+          C 60 152, 55 120, 90 110
+          C 240 70, 320 190, 420 100
+          C 460 65, 470 40, 500 55
+          C 520 65, 515 90, 495 95
+          C 500 110, 520 118, 535 108" />
+        <g class="pen-tip" transform="translate(505, 95) rotate(35)">
+          <rect x="-6" y="-34" width="12" height="34" rx="3" fill="#25324A"/>
+          <polygon points="-6,0 6,0 0,10" fill="#D64545"/>
+          <rect x="-6" y="-34" width="12" height="8" rx="2" fill="#4E9E6E"/>
+        </g>
+      </svg>
+    </div>
+
+    <h1>Oups… <span class="highlight">page 404</span></h1>
+    <p class="lead">
+      Le stylo a dérapé et cette page n'existe pas (ou plus).
+      Pas de souci, on te ramène sur le bon chemin !
+    </p>
+
+    <div class="actions">
+      <a class="btn" href="/">Retour à l'accueil</a>
+      <a class="btn secondary" href="javascript:history.back()">Page précédente</a>
+    </div>
+  </main>
+
+  <footer>
+    <span class="paw">✎</span> Une page qui a un peu trop gribouillé.
+  </footer>
+
+</body>
+</html>

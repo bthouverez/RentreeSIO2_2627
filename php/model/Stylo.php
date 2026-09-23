@@ -6,14 +6,14 @@ class Stylo {
 	private string $marque;
 	private bool   $fonctionne;
 	private int    $niveau_encre;
-	private Enfant $enfant;
+	private ?Enfant $enfant;
 
 	public function __construct() {
-		$this->id = 42;
-		$this->couleur = 'Orange';
-		$this->marque = 'Parker';
-		$this->fonctionne = true;
-		$this->niveau_encre = 75;
+		$this->id = -1;
+		$this->couleur = '';
+		$this->marque = '';
+		$this->fonctionne = false;
+		$this->niveau_encre = 0;
 		$this->enfant = new Enfant();
 	}
 
@@ -50,6 +50,24 @@ class Stylo {
 		$r .= 'fonctionne : ' 		. $this->distanceAuSol  . PHP_EOL; 
 		$r .= 'Propriétaire : ' 		. $this->enfant  . PHP_EOL; 
 		return $r;
+	}
+
+	public function toHTMLColor(): string {
+		switch($this->couleur) {
+			case "Argenté": 	return "silver";
+			case "Bleu": 		return "blue";
+			case "Doré": 		return "goldenrod";
+			case "Fuchsia": 	return "fuschia";
+			case "Gris": 		return "grey";
+			case "Jaune": 		return "yellow";
+			case "Marron": 		return "brown";
+			case "Noir": 		return "black";
+			case "Orange": 		return "orange";
+			case "Rose": 		return "pink";
+			case "Rouge": 		return "red";
+			case "Vert": 		return "green";
+			case "Violet": 		return "purple";
+		}
 	}
 }
 
