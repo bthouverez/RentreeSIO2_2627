@@ -16,4 +16,4 @@ $nouvelEnfant->distance_au_sol = 12536;
 $nouvelEnfant->date_naissance = '1953-04-13';
 
 
-$daoEnfant->create($nouvelEnfant);
+$dNouvelEnfant = $daoEnfant->create($nouvelEnfant);
