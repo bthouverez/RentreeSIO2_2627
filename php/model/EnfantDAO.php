@@ -77,8 +77,13 @@ class EnfantDAO extends DAO {
 
 	}
 
+	// Créer et persister (sauvegarder dans la bdd) un Enfant
+	public function create(Enfant $enfant) { 
 
-	// create()
+		
+
+		// Sauvegarder les données d'un nouvel enfant dans la bdd
+	}
 
 	// update()
 
