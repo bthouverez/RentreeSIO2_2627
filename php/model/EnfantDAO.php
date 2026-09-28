@@ -105,6 +105,12 @@ class EnfantDAO extends DAO {
 
 	// update()
 
-	// delete()
+	public function delete($id) : void {
+
+	}
+
+	public function getEnfantsTresMouillesQuiOntFaim() : array {
+		// retourne les enfants mouilles à + de 70% qui ont maché un stylo qui fonctionne
+	}
 
 }

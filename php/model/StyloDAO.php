@@ -109,4 +109,11 @@ class StyloDAO extends DAO {
 	public function create(Stylo $stylo): int {
 		// TODO 
 	} 
+
+
+
+	public function delete($id) : void {
+
+	}
+	
 }
