@@ -112,7 +112,16 @@ class StyloDAO extends DAO {
 
 
 
+	/*public function delete($id) : void {
+		$sql = 'DELETE FROM Stylos WHERE id = ?';
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute([$id]);
+	}*/
+
 	public function delete($id) : void {
+		$this->pdo->prepare('DELETE FROM Macher WHERE id_stylo = ?')->execute([$id]);
+		$this->pdo->prepare('DELETE FROM Stylos WHERE id = ?')->execute([$id]);
+		//$this->pdo->prepare('DELETE FROM Macher WHERE id_stylo = ?; DELETE FROM Stylos WHERE id = ?')->execute([$id, $id]);
 
 	}
 	

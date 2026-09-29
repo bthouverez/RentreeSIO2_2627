@@ -5,6 +5,17 @@ require_once('Stylo.php');
 
 class EnfantDAO extends DAO {
 
+	public function hydrate(array $tabFromFetch) : Enfant {
+		$e = new Enfant;
+		$e->id = $tabFromFetch['id'];
+		$e->nom = $tabFromFetch['nom'];
+		$e->prenom = $tabFromFetch['prenom'];
+		$e->num_tel = $tabFromFetch['num_tel'];
+		$e->taux_humidite = $tabFromFetch['taux_humidite'];
+		$e->date_naissance = $tabFromFetch['date_naissance'];
+		$e->distance_au_sol = $tabFromFetch['distance_au_sol'];
+		return $e;
+	}
 	
 
 	// getById($id) : Enfant
@@ -24,13 +35,7 @@ class EnfantDAO extends DAO {
 
 		if($tabEnfants) {
 
-			$enfant->id = $tabEnfants[0]['id'];
-			$enfant->nom = $tabEnfants[0]['nom'];
-			$enfant->prenom = $tabEnfants[0]['prenom'];
-			$enfant->num_tel = $tabEnfants[0]['num_tel'];
-			$enfant->date_naissance = $tabEnfants[0]['date_naissance'];
-			$enfant->distance_au_sol = $tabEnfants[0]['distance_au_sol'];
-			$enfant->taux_humidite = $tabEnfants[0]['taux_humidite'];
+			$enfant = $this->hydrate($tabEnfants[0]);
 
 			foreach($tabEnfants as $tabEnfant) if($tabEnfant['marque']) {
 				$s = new Stylo;
@@ -59,17 +64,8 @@ class EnfantDAO extends DAO {
 			$allEnfants = array();
 			// parcourir chaque ligne résultat et créer un Enfant
 			foreach($stmt->fetchAll() as $tab) {
-				$e = new Enfant;
-				$e->id = $tab['id']; 
-				$e->nom = $tab['nom']; 
-				$e->prenom = $tab['prenom']; 
-				$e->num_tel = $tab['num_tel']; 
-				$e->date_naissance = $tab['date_naissance']; 
-				$e->distance_au_sol = $tab['distance_au_sol'];
-				$e->taux_humidite = $tab['taux_humidite'];
-				
-				// ajouter cet enfant créé dans un array
-				$allEnfants[] = $e;
+
+				$allEnfants[] = $this->hydrate($tab);
 			}
 
 		// renvoyer cet array
@@ -106,11 +102,28 @@ class EnfantDAO extends DAO {
 	// update()
 
 	public function delete($id) : void {
-
+		// Mettre le propriétaire a jour des stylos de l'enfant n° $id
+		$this->pdo->prepare('UPDATE Stylos SET id_enfant = NULL WHERE id_enfant = ?')->execute([$id]);
+		$this->pdo->prepare('DELETE FROM Macher WHERE id_enfant = ?')->execute([$id]);
+		$this->pdo->prepare('DELETE FROM Enfants WHERE id = ?')->execute([$id]);
 	}
 
 	public function getEnfantsTresMouillesQuiOntFaim() : array {
 		// retourne les enfants mouilles à + de 70% qui ont maché un stylo qui fonctionne
+		$sql = "SELECT DISTINCT(e.id), nom, prenom, num_tel, date_naissance, distance_au_sol, taux_humidite FROM Enfants e 
+			INNER JOIN Macher m ON m.id_enfant = e.id
+			INNER JOIN Stylos s ON m.id_stylo = s.id
+			WHERE e.taux_humidite > 0.7 
+			AND s.fonctionne = TRUE";
+		$stmt = $this->pdo->query($sql);
+		$result = [];
+
+		foreach($stmt->fetchAll() as $tabEnfant) {
+			$result[] = $this->hydrate($tabEnfant);
+		}
+
+		return $result;
+
 	}
 
 }

@@ -96,7 +96,7 @@ INSERT INTO Enfants (nom, prenom, num_tel, date_naissance, distance_au_sol, taux
     ('Lambert', 'Juliette', '0664507495', '2019-05-31', 118, 0.709);
 
 INSERT INTO Stylos (couleur, marque, niveau_encre, fonctionne, id_enfant) VALUES
-    ('Argenté', 'Lamy', 27, FALSE, 25),
+    ('Argenté', 'Lamy', 27, FALSE, 1),
     ('Violet', 'Faber-Castell', 57, TRUE, 2),
     ('Vert', 'Bic', 54, TRUE, 31),
     ('Gris', 'Waterman', 0, FALSE, NULL),

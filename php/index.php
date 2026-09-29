@@ -8,14 +8,14 @@ require_once('model/StyloDAO.php');
 
 // controller
 
-/*
+
 $idEnfant = $_GET['enfant'] ?? 22;
 $daoEnfant = new EnfantDAO;
 $enfant = $daoEnfant->getById($idEnfant);
 
 // include copie/colle le code du fichier passé 
 include('view/unEnfant.php');
-*/
+
 
 $idStylo = $_GET['stylo'] ?? 12;
 $daoStylo = new StyloDAO;
