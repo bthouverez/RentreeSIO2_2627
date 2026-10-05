@@ -6,23 +6,60 @@ ini_set('display_startup_errors', 1);
 require_once('model/EnfantDAO.php');
 require_once('model/StyloDAO.php');
 
+$daoEnfant = new EnfantDAO;
+$daoStylo = new StyloDAO;
+
+
 // controller
 
+include('view/head.html');
 
-$idEnfant = $_GET['enfant'] ?? 22;
-$daoEnfant = new EnfantDAO;
-$enfant = $daoEnfant->getById($idEnfant);
+if(isset($_GET['accueil'])) {
+	include('view/accueil.html');
+}
 
-// include copie/colle le code du fichier passé 
-include('view/unEnfant.php');
+if(isset($_GET['enfants'])) {
+	// Affichage de tous les enfants
+	$enfants = $daoEnfant->getAll();
+	include('view/desEnfants.php');
+}
 
+if(isset($_GET['enfant'])) {
+	// Affichage d'un enfant
+	$idEnfant = $_GET['enfant'] ?? 22;
+	$enfant = $daoEnfant->getById($idEnfant);
+	include('view/unEnfant.php');
+}
 
-$idStylo = $_GET['stylo'] ?? 12;
-$daoStylo = new StyloDAO;
-$stylo = $daoStylo->getById($idStylo);
-
-// include copie/colle le code du fichier passé 
-if($stylo->id != -1) 
-	include('view/unStylo.php');
-else 
+if(isset($_GET['stylos'])) {
 	include('view/404_claude.html');
+}
+
+if(isset($_GET['stylo'])) {
+	// Affichage d'un stylo
+	$idStylo = $_GET['stylo'] ?? 12;
+	$stylo = $daoStylo->getById($idStylo);
+	include('view/unStylo.php');
+}
+
+// traitement du formulaire d'ajout
+if(isset($_POST['btnAjoutEnfant'])) {
+	$_POST['id'] = -1;
+	$enfant = $daoEnfant->hydrate($_POST);
+	$id = $daoEnfant->create($enfant);
+	$enfant->id = $id;
+	include('view/unEnfant.php');
+}
+
+if(isset($_GET['ajoutEnfant'])) {
+	// La vue de création d'un enfant
+	include('view/formEnfant.php');
+}
+
+if(isset($_GET['ajoutStylo'])) {
+	include('view/404_claude.html');
+}
+
+
+
+include('view/foot.html');

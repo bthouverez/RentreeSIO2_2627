@@ -75,7 +75,6 @@ class EnfantDAO extends DAO {
 
 	// Créer et persister (sauvegarder dans la bdd) un Enfant
 	public function create(Enfant $enfant) : int { 
-
 		// Extraire les données en $enfant
 		$sql = "INSERT INTO Enfants 
 				(nom, prenom, distance_au_sol, taux_humidite, date_naissance, num_tel) 

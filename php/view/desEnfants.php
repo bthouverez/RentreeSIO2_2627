@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Des Efantns</title>
-</head>
-<body>
 
 
 	<table>
@@ -19,7 +11,7 @@
 			<th>Naissance</th>
 		</tr>
 
-		<?php foreach($lesEnfantsMouilles as $e) { ?>
+		<?php foreach($enfants as $e) { ?>
 		<tr>
 			<td><?= $e->id ?></td>
 			<td><?= $e->nom ?></td>
@@ -31,7 +23,3 @@
 		</tr>
 		<?php } ?>
 	</table>
-
-
-</body>
-</html>
