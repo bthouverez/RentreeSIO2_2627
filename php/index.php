@@ -32,7 +32,8 @@ if(isset($_GET['enfant'])) {
 }
 
 if(isset($_GET['stylos'])) {
-	include('view/404_claude.html');
+	$stylos = $daoStylo->getAll();
+	include('view/desStylos.php');
 }
 
 if(isset($_GET['stylo'])) {
