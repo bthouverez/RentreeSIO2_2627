@@ -26,8 +26,10 @@ if(isset($_GET['enfants'])) {
 
 if(isset($_GET['enfant'])) {
 	// Affichage d'un enfant
-	$idEnfant = $_GET['enfant'] ?? 22;
-	$enfant = $daoEnfant->getById($idEnfant);
+	if(isset($_GET['enfant']) && $_GET['enfant'] != '')
+		$enfant = $daoEnfant->getById($_GET['enfant']);
+	else
+		$enfant = $daoEnfant->first();
 	include('view/unEnfant.php');
 }
 
@@ -38,7 +40,7 @@ if(isset($_GET['stylos'])) {
 
 if(isset($_GET['stylo'])) {
 	// Affichage d'un stylo
-	if(isset($_GET['stylo']))
+	if(isset($_GET['stylo']) && $_GET['stylo'] != '')
 		$stylo = $daoStylo->getById($_GET['stylo']);
 	else
 		$stylo = $daoStylo->first();
@@ -61,6 +63,7 @@ if(isset($_GET['ajoutEnfant'])) {
 }
 
 if(isset($_GET['ajoutStylo'])) {
+	$enfants = $daoEnfant->getAll();
 	include('view/formStylo.php');
 }
 
@@ -68,8 +71,15 @@ if(isset($_GET['ajoutStylo'])) {
 if(isset($_POST['btnAjoutStylo'])) {
 	$_POST['id'] = -1;
 	$stylo = $daoStylo->hydrate($_POST);
+	$e = new Enfant;
+	if($_POST['proprietaire'] != "0"){
+		$e->id = intval($_POST['proprietaire']);
+		$stylo->enfant = $daoEnfant->getById($e->id);
+	} else {
+		$stylo->enfant = null;
+	}
 	$id = $daoStylo->create($stylo);
-	$stylo->id = $id;
+	$stylo = $daoStylo->getById($id);
 	include('view/unStylo.php');
 }
 

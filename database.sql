@@ -31,11 +31,11 @@ CREATE TABLE Macher (
 
 
 ALTER TABLE Stylos ADD CONSTRAINT fk_proprietaire 
-FOREIGN KEY (id_enfant) REFERENCES Enfants(id);
+FOREIGN KEY (id_enfant) REFERENCES Enfants(id) ON DELETE CASCADE;
 ALTER TABLE Macher ADD CONSTRAINT fk_macheur 
-FOREIGN KEY (id_enfant) REFERENCES Enfants(id);
+FOREIGN KEY (id_enfant) REFERENCES Enfants(id) ON DELETE CASCADE;
 ALTER TABLE Macher ADD CONSTRAINT fk_stylo_mache 
-FOREIGN KEY (id_stylo) REFERENCES Stylos(id);
+FOREIGN KEY (id_stylo) REFERENCES Stylos(id) ON DELETE CASCADE;
 
 -- Données supplémentaires : à exécuter APRÈS le script de création des tables
 -- 50 enfants, 50 stylos, et 90 relations Macher en plus

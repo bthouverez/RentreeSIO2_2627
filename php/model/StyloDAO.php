@@ -116,8 +116,8 @@ class StyloDAO extends DAO {
 
 	public function create(Stylo $stylo): int {
 		$sql = "INSERT INTO Stylos 
-				(couleur, marque, niveau_encre) 
-				VALUES (?, ?, ?);";
+				(couleur, marque, niveau_encre, id_enfant) 
+				VALUES (?, ?, ?, ?);";
 
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute(
@@ -125,6 +125,7 @@ class StyloDAO extends DAO {
 				$stylo->couleur, 
 				$stylo->marque, 
 				$stylo->niveau_encre,
+				$stylo->enfant?->id,
 			]);
 
 		// a insérer dans une requête INSERT INTO
@@ -151,7 +152,7 @@ class StyloDAO extends DAO {
 
 	// Renvoie le premier stylo de la BDD
 	public function first() : Stylo {
-		// TODO
+		return $this->hydrate($this->pdo->query('SELECT * FROM Stylos LIMIT 1')->fetch());
 	}
 	
 }

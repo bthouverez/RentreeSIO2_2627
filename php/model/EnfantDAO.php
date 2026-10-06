@@ -125,4 +125,17 @@ class EnfantDAO extends DAO {
 
 	}
 
+	public function first() : Enfant {
+
+		/*
+		$sql = 'SELECT * FROM Enfants LIMIT 1';
+		$stmt = $this->pdo->query($sql);
+		$tab = $stmt->fetch();
+		return $this->hydrate($tab);
+
+		*/
+		
+		return $this->hydrate($this->pdo->query('SELECT * FROM Enfants LIMIT 1')->fetch());
+	}
+
 }
