@@ -38,8 +38,11 @@ if(isset($_GET['stylos'])) {
 
 if(isset($_GET['stylo'])) {
 	// Affichage d'un stylo
-	$idStylo = $_GET['stylo'] ?? 12;
-	$stylo = $daoStylo->getById($idStylo);
+	if(isset($_GET['stylo']))
+		$stylo = $daoStylo->getById($_GET['stylo']);
+	else
+		$stylo = $daoStylo->first();
+	
 	include('view/unStylo.php');
 }
 
@@ -70,5 +73,10 @@ if(isset($_POST['btnAjoutStylo'])) {
 	include('view/unStylo.php');
 }
 
+if(isset($_GET['supprStylo'])) {
+	$daoStylo->delete($_GET['supprStylo']);
+	$stylos = $daoStylo->getAll();
+	include('view/desStylos.php');
+}
 
 include('view/foot.html');

@@ -18,8 +18,8 @@
 		<td><?= $s->couleur ?></td>
 		<td><?= $s->niveau_encre ?></td>
 		<td><?= $s->id ?></td>
-		<td><a href="index.php?stylo=<?= $s->id ?>">GO</a></td>
-		<td> ???? </td>
+		<td><a href="index.php?stylo=<?= $s->id ?>">Voir</a></td>
+		<td><a href="index.php?supprStylo=<?= $s->id ?>">X</a> </td>
 	</tr>
 
 	<?php } ?>

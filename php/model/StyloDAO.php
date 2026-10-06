@@ -124,7 +124,7 @@ class StyloDAO extends DAO {
 			[
 				$stylo->couleur, 
 				$stylo->marque, 
-				$stylo->niveauju_encre,
+				$stylo->niveau_encre,
 			]);
 
 		// a insérer dans une requête INSERT INTO
@@ -146,6 +146,12 @@ class StyloDAO extends DAO {
 		$this->pdo->prepare('DELETE FROM Stylos WHERE id = ?')->execute([$id]);
 		//$this->pdo->prepare('DELETE FROM Macher WHERE id_stylo = ?; DELETE FROM Stylos WHERE id = ?')->execute([$id, $id]);
 
+	}
+
+
+	// Renvoie le premier stylo de la BDD
+	public function first() : Stylo {
+		// TODO
 	}
 	
 }

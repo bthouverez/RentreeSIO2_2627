@@ -4,11 +4,11 @@ Ajouter un stylo
 </h1>
 
 <form method="post" action="index.php">
-	<label for="couleur">couleur</label>
-	<input id="couleur" type="text" name="couleur" />
-	<label for="marque">marque</label>
-	<input id="marque" type="text" name="marque" />
-	<label for="niveau_encre">niveau_encre</label>
-	<input id="niveau_encre" type="text" name="niveau_encre" />
+	<label class="form-label" for="couleur">Couleur</label>
+	<input class="form-control" id="couleur" type="text" name="couleur" />
+	<label class="form-label" for="marque">Marque</label>
+	<input class="form-control" id="marque" type="text" name="marque" />
+	<label class="form-label" for="niveau_encre">Niveau d'encre</label>
+	<input class="form-control" id="niveau_encre" type="text" name="niveau_encre" />
 	<button name="btnAjoutStylo">Ajouter</button>
 </form>
