@@ -5,7 +5,15 @@ require_once 'Stylo.php';
 
 class StyloDAO extends DAO {
 
-
+	public function hydrate(array $tab) : Stylo {
+		$s = new Stylo;
+		$s->id = $tab['id'];
+		$s->couleur = $tab['couleur'];
+		$s->marque = $tab['marque'];
+		$s->niveau_encre = $tab['niveau_encre'];
+		return $s;
+	}
+	
 	// getById($id) : Stylo
 
 	// Read
@@ -107,7 +115,22 @@ class StyloDAO extends DAO {
 
 
 	public function create(Stylo $stylo): int {
-		// TODO 
+		$sql = "INSERT INTO Stylos 
+				(couleur, marque, niveau_encre) 
+				VALUES (?, ?, ?);";
+
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute(
+			[
+				$stylo->couleur, 
+				$stylo->marque, 
+				$stylo->niveauju_encre,
+			]);
+
+		// a insérer dans une requête INSERT INTO
+
+		// renvoyer l'id du nouvel enfant créé
+		return $this->pdo->lastInsertId();
 	} 
 
 

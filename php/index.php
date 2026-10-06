@@ -58,9 +58,17 @@ if(isset($_GET['ajoutEnfant'])) {
 }
 
 if(isset($_GET['ajoutStylo'])) {
-	include('view/404_claude.html');
+	include('view/formStylo.php');
 }
 
+// traitement du formulaire d'ajout
+if(isset($_POST['btnAjoutStylo'])) {
+	$_POST['id'] = -1;
+	$stylo = $daoStylo->hydrate($_POST);
+	$id = $daoStylo->create($stylo);
+	$stylo->id = $id;
+	include('view/unStylo.php');
+}
 
 
 include('view/foot.html');

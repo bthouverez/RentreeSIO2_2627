@@ -1,214 +1,411 @@
+/* =========================================================
+   Les Enfants Mouillés du Stylo — feuille de style globale
+   Thème : cahier d'école cartoon, enfants + stylos + flaques.
+   taux_humidite  -> accents bleus "eau/pluie" (💧)
+   distance_au_sol -> accents "envol" (🎈), les enfants flottent
+   ========================================================= */
+
+:root {
+	--paper: #FBF6EC;
+	--paper-line: #E3D9C2;
+	--ink: #25324A;
+	--ink-soft: #4A5A78;
+	--bic-red: #D64545;
+	--bic-blue: #3D7DC9;
+	--highlighter: #F2C94C;
+	--felt-green: #4E9E6E;
+	--sky: #CFEAF8;
+	--radius: 16px;
+	--shadow-hard: 5px 5px 0 var(--ink);
+}
+
 * {
-			box-sizing: border-box;
-		}
+	box-sizing: border-box;
+}
 
-		body {
-			background: orange;
-			font-family: "Segoe UI", Arial, sans-serif;
-			color: #333;
-			display: flex;
-			justify-content: center;
-			padding: 40px 20px;
-		}
+html, body {
+	margin: 0;
+	min-height: 100%;
+}
 
-		.cardEnfant {
-			background: #fff;
-			padding: 30px 35px;
-			border-radius: 12px;
-			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-			width: 550px;
-			max-width: 100%;
-		}
+body {
+	font-family: "Nunito", "Segoe UI", Arial, sans-serif;
+	color: var(--ink);
+	background-color: var(--paper);
+	background-image: linear-gradient(var(--paper-line) 1px, transparent 1px);
+	background-size: 100% 36px;
+	background-position: 0 70px;
+	padding: 0 24px 60px;
+}
 
-		.cardEnfant h1 {
-			margin: 0 0 20px;
-			font-size: 1.5em;
-			color: #2c3e50;
-			border-bottom: 2px solid #eef1f5;
-			padding-bottom: 12px;
-		}
+h1, h2, h3 {
+	font-family: "Patrick Hand", "Segoe UI", cursive, sans-serif;
+	color: var(--ink);
+	letter-spacing: 0.3px;
+}
 
-		.infos {
-			list-style: none;
-			padding: 0;
-			margin: 0 0 20px;
-		}
+a {
+	color: var(--bic-blue);
+	text-decoration: none;
+}
 
-		.infos > li {
-			padding: 8px 0;
-			border-bottom: 1px solid #f0f0f0;
-		}
+a:hover {
+	color: var(--bic-red);
+	text-decoration: underline wavy;
+}
 
-		.infos > li:last-child {
-			border-bottom: none;
-		}
+/* ---------- Barre de navigation ---------- */
 
-		.trousse {
-			list-style: none;
-			padding: 0;
-			margin: 10px 0 0;
-			display: flex;
-			flex-direction: column;
-			gap: 6px;
-		}
+nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	align-items: center;
+	background: var(--ink);
+	margin: 0 -24px 30px;
+	padding: 16px 24px;
+	box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
 
-		.stylo {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-			padding: 6px 10px;
-			background: #f7f8fa;
-			border-radius: 6px;
-		}
+nav a {
+	color: #fff;
+	background: rgba(255, 255, 255, 0.08);
+	padding: 8px 14px;
+	border-radius: 999px;
+	font-weight: 700;
+	font-size: 0.95em;
+	transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
 
-		.stylo .pastille {
-			width: 14px;
-			height: 14px;
-			border-radius: 50%;
-			border: 1px solid rgba(0, 0, 0, 0.2);
-			flex-shrink: 0;
-		}
+nav a:hover {
+	background: var(--highlighter);
+	color: var(--ink);
+	text-decoration: none;
+	transform: translateY(-2px) rotate(-1deg);
+}
 
-		.stylo .niveau {
-			margin-left: auto;
-			font-size: 0.85em;
-			color: #777;
-		}
+/* ---------- Titres hors carte (accueil, formulaire) ---------- */
 
-		.nav {
-			display: flex;
-			justify-content: space-between;
-			margin-top: 25px;
-		}
+body > h1 {
+	max-width: 700px;
+	margin: 10px auto 30px;
+	text-align: center;
+	font-size: 2em;
+	color: var(--bic-red);
+}
 
-		.nav a {
-			text-decoration: none;
-		}
+/* ---------- Cartes enfant / stylo ---------- */
 
-		.nav button {
-			padding: 8px 18px;
-			border: none;
-			border-radius: 6px;
-			background: #2c3e50;
-			color: #fff;
-			font-size: 1em;
-			cursor: pointer;
-		}
+.cardEnfant,
+.cardStylo {
+	position: relative;
+	overflow: hidden;
+	background: #fff;
+	padding: 30px 35px;
+	border: 3px solid var(--ink);
+	border-radius: var(--radius);
+	box-shadow: var(--shadow-hard);
+	width: 550px;
+	max-width: 100%;
+	margin: 20px auto 40px;
+}
 
-		.nav button:hover {
-			background: #1a252f;
-		}
+.cardEnfant::after,
+.cardStylo::after {
+	position: absolute;
+	right: -10px;
+	bottom: -20px;
+	font-size: 6em;
+	opacity: 0.08;
+	pointer-events: none;
+}
 
-		.empty {
-			text-align: center;
-			color: #888;
-			font-size: 1.2em;
-		}
+.cardEnfant::after {
+	content: "💧";
+}
 
+.cardStylo::after {
+	content: "🖊️";
+}
 
+.cardEnfant h1,
+.cardStylo h1 {
+	margin: 0 0 20px;
+	font-size: 1.6em;
+	color: var(--ink);
+	border-bottom: 2px dashed var(--paper-line);
+	padding-bottom: 12px;
+}
 
-		* {
-			box-sizing: border-box;
-		}
+.infos {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 20px;
+	position: relative;
+	z-index: 1;
+}
 
-		body {
-			font-family: "Segoe UI", Arial, sans-serif;
-			color: #333;
-			display: flex;
-			justify-content: center;
-			padding: 40px 20px;
-		}
+.infos > li {
+	padding: 9px 2px;
+	border-bottom: 1px solid var(--paper-line);
+}
 
-		.cardStylo {
-			background: #fff;
-			padding: 30px 35px;
-			border-radius: 12px;
-			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-			width: 550px;
-			max-width: 100%;
-		}
+.infos > li:last-child {
+	border-bottom: none;
+}
 
-		.cardStylo h1 {
-			margin: 0 0 20px;
-			font-size: 1.5em;
-			color: #2c3e50;
-			border-bottom: 2px solid #eef1f5;
-			padding-bottom: 12px;
-		}
+/* 3e ligne de la carte enfant : taux d'humidité -> goutte animée */
+.cardEnfant .infos > li:nth-child(3)::before {
+	content: "💧";
+	display: inline-block;
+	margin-right: 6px;
+	animation: drop-wiggle 1.6s ease-in-out infinite;
+}
 
-		.infos {
-			list-style: none;
-			padding: 0;
-			margin: 0 0 20px;
-		}
+/* 4e ligne de la carte enfant : distance au sol -> ça s'envole ! */
+.cardEnfant .infos > li:nth-child(4)::before {
+	content: "🎈";
+	display: inline-block;
+	margin-right: 6px;
+	animation: float-bob 2.4s ease-in-out infinite;
+}
 
-		.infos > li {
-			padding: 8px 0;
-			border-bottom: 1px solid #f0f0f0;
-		}
+@keyframes drop-wiggle {
+	0%, 100% { transform: translateY(0) scale(1); }
+	50% { transform: translateY(3px) scale(1.1); }
+}
 
-		.infos > li:last-child {
-			border-bottom: none;
-		}
+@keyframes float-bob {
+	0%, 100% { transform: translateY(0) rotate(-4deg); }
+	50% { transform: translateY(-7px) rotate(4deg); }
+}
 
-		.proprietaire {
-			list-style: none;
-			padding: 0;
-			margin: 10px 0 0;
-			display: flex;
-			flex-direction: column;
-			gap: 6px;
-		}
+.trousse,
+.proprietaire {
+	list-style: none;
+	padding: 0;
+	margin: 10px 0 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
 
-		.stylo {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-			padding: 6px 10px;
-			background: #f7f8fa;
-			border-radius: 6px;
-		}
+.stylo {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 12px;
+	background: var(--sky);
+	border: 2px solid var(--ink);
+	border-radius: 10px;
+	transition: transform 0.15s ease;
+}
 
-		.stylo .pastille {
-			width: 14px;
-			height: 14px;
-			border-radius: 50%;
-			border: 1px solid rgba(0, 0, 0, 0.2);
-			flex-shrink: 0;
-		}
+.stylo:hover {
+	transform: translateX(3px) rotate(-0.5deg);
+}
 
-		.stylo .niveau {
-			margin-left: auto;
-			font-size: 0.85em;
-			color: #777;
-		}
+.pastille {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	border: 2px solid var(--ink);
+	box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.15), inset 2px 2px 0 rgba(255, 255, 255, 0.5);
+	flex-shrink: 0;
+	vertical-align: middle;
+}
 
-		.nav {
-			display: flex;
-			justify-content: space-between;
-			margin-top: 25px;
-		}
+.cardStylo > .pastille {
+	width: 26px;
+	height: 26px;
+	margin: 4px 0 18px;
+}
 
-		.nav a {
-			text-decoration: none;
-		}
+.stylo .niveau {
+	margin-left: auto;
+	font-size: 0.85em;
+	font-weight: 700;
+	color: var(--ink-soft);
+}
 
-		.nav button {
-			padding: 8px 18px;
-			border: none;
-			border-radius: 6px;
-			background: #2c3e50;
-			color: #fff;
-			font-size: 1em;
-			cursor: pointer;
-		}
+/* ---------- Pagination précédent / suivant ---------- */
 
-		.nav button:hover {
-			background: #1a252f;
-		}
+.nav {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 25px;
+}
 
-		.empty {
-			text-align: center;
-			color: #888;
-			font-size: 1.2em;
-		}
+.nav a {
+	text-decoration: none;
+}
+
+/* ---------- Boutons ---------- */
+
+button,
+.btn {
+	padding: 10px 20px;
+	border: 2px solid var(--ink);
+	border-radius: 999px;
+	background: var(--ink);
+	color: #fff;
+	font-family: inherit;
+	font-weight: 700;
+	font-size: 1em;
+	cursor: pointer;
+	box-shadow: 3px 3px 0 var(--ink);
+	transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+button:hover,
+.btn:hover {
+	background: var(--bic-blue);
+	transform: translateY(-2px);
+	box-shadow: 4px 5px 0 var(--ink);
+}
+
+button:active,
+.btn:active {
+	transform: translate(2px, 2px);
+	box-shadow: 1px 1px 0 var(--ink);
+}
+
+.btn-success {
+	background: var(--felt-green);
+	color: #fff;
+}
+
+.btn-success:hover {
+	background: #5fb881;
+}
+
+.empty {
+	text-align: center;
+	color: var(--ink-soft);
+	font-size: 1.2em;
+	padding: 40px 0;
+}
+
+/* ---------- Tableaux (liste des enfants / des stylos) ---------- */
+
+table {
+	width: 100%;
+	max-width: 900px;
+	margin: 10px auto 40px;
+	border-collapse: separate;
+	border-spacing: 0;
+	background: #fff;
+	border: 3px solid var(--ink);
+	border-radius: var(--radius);
+	overflow: hidden;
+	box-shadow: var(--shadow-hard);
+}
+
+thead {
+	background: var(--ink);
+}
+
+th {
+	color: #fff;
+	font-family: "Patrick Hand", cursive, sans-serif;
+	font-size: 1.05em;
+	text-align: left;
+	padding: 12px 16px;
+}
+
+td {
+	padding: 10px 16px;
+	border-bottom: 1px solid var(--paper-line);
+}
+
+tr:last-child td {
+	border-bottom: none;
+}
+
+tbody tr:nth-child(even),
+table tr:nth-child(even) {
+	background: #FBF6EC;
+}
+
+tr:hover td {
+	background: var(--sky);
+}
+
+table a {
+	font-weight: 700;
+}
+
+.table-enfants td:nth-child(5) {
+	color: var(--bic-red);
+	font-weight: 700;
+}
+
+.table-enfants td:nth-child(6) {
+	color: var(--bic-blue);
+	font-weight: 700;
+}
+
+/* ---------- Formulaires ---------- */
+
+form {
+	max-width: 500px;
+	margin: 10px auto 40px;
+	background: #fff;
+	border: 3px solid var(--ink);
+	border-radius: var(--radius);
+	box-shadow: var(--shadow-hard);
+	padding: 30px 35px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.form-label {
+	font-weight: 700;
+	margin-top: 12px;
+	color: var(--ink);
+}
+
+.form-control {
+	padding: 10px 14px;
+	border: 2px solid var(--ink);
+	border-radius: 10px;
+	font-family: inherit;
+	font-size: 1em;
+	background: var(--paper);
+}
+
+.form-control:focus {
+	outline: none;
+	border-color: var(--bic-blue);
+	box-shadow: 0 0 0 3px rgba(61, 125, 201, 0.25);
+}
+
+form button,
+form .btn {
+	margin-top: 20px;
+	align-self: flex-start;
+}
+
+/* ---------- Petits écrans ---------- */
+
+@media (max-width: 600px) {
+	body {
+		padding: 0 12px 40px;
+	}
+
+	nav {
+		margin: 0 -12px 24px;
+		padding: 14px 12px;
+	}
+
+	.cardEnfant,
+	.cardStylo,
+	form {
+		padding: 22px 20px;
+	}
+}

@@ -1,6 +1,7 @@
 
 
-	<table>
+	<table class="table-enfants">
+		<thead>
 		<tr>
 			<th>Id</th>
 			<th>Nom</th>
@@ -10,6 +11,7 @@
 			<th>% humidité</th>
 			<th>Naissance</th>
 		</tr>
+		</thead>
 
 		<?php foreach($enfants as $e) { ?>
 		<tr>

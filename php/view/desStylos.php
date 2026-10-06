@@ -1,10 +1,11 @@
-<table>
+<table class="table-stylos">
 	<thead>
 		<tr>
 			<th>id</th>
 			<th>marque</th>
 			<th>couleur</th>
 			<th>niveau encre</th>
+			<th>propriétaire</th>
 			<th>voir</th>
 			<th>suppr</th>
 		</tr>
